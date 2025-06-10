@@ -27,29 +27,80 @@
     <!-- Main Content -->
     <main>
         <!-- Home Section -->
-         <section id="home">
-            <h1>Hi there, welcome to my portfolio website!</h1>
-            <p>My name is Carlos Gerardi, I am a Junior Website Developer.</p>
+        <div class="container-body">
+            <section id="home">
+                <h1>Hi there, welcome to my portfolio website!</h1>
+                <p>My name is Carlos Gerardi, I am a Junior Website Developer.</p>
 
-            <!-- Banner Section -->
-            <div class="banner-img"></div>
-         </section>
+                <!-- Banner Section -->
+                <div class="banner-img"></div>
+            </section>
+        </div>
+        <hr />
 
-         <hr />
+        <!-- Our Profile Section -->
+        <div class="container-body">
+            <section id="our-profile">
+                <h1>Our Profile</h1>
+                <p>We are a team of passionate developers.</p>
 
-         <!-- Our Profile Section -->
-         <section id="our-profile">
-            <h1>Our Profile</h1>
-            <p>We are a team of passionate developers.</p>
-         </section>
+                <div class="profile-container">
+                    <div class="profile-item">
+                        <img src="https://picsum.photos/200" alt="Profile 1">
+                        <p>Alice</p>
+                    </div>
+                    <div class="profile-item">
+                        <img src="https://picsum.photos/200" alt="Profile 2">
+                        <p>Bob</p>
+                    </div>
+                    <div class="profile-item">
+                        <img src="https://picsum.photos/200" alt="Profile 3">
+                        <p>Charlie</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <hr />
+        
+        <div class="container-body">
+            <!-- Message Us Section -->
+            <section id="message-us">
+                <h1>Message Us</h1>
+                <p>If you have any questions, feel free to reach out!</p>
 
-         <hr />
-         
-         <!-- Message Us Section -->
-         <section id="message-us">
-            <h1>Message Us</h1>
-            <p>If you have any questions, feel free to reach out!</p>
-         </section>
+                <div class="container">
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <span class="colon">:</span>
+                            <input type="text" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggallahir">Tanggal Lahir</label>
+                            <span class="colon">:</span>
+                            <input type="date" id="tanggallahir" name="tanggallahir">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Jenis Kelamin</label>
+                            <span class="colon">:</span>
+                            <label><input type="radio" value="Laki-Laki" name="jeniskelamin">Laki-Laki</label>
+                            <label><input type="radio" value="Perempuan" name="jeniskelamin">Perempuan</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Pesan</label>
+                            <span class="colon">:</span>
+                            <textarea id="pesan" name="pesan" rows="7" cols="48"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Submit">
+                        </div>
+                    </form>
+
+                    <div class="output-box" id="resultBox"></div>
+                </div>
+            </section>
+        </div>
+        <hr>
     </main>
 
     <!-- Footer Content -->
@@ -58,4 +109,6 @@
         <p></p>
     </footer>
 </body>
+
+<script src="js/script.js"></script>
 </html>
