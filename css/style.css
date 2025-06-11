@@ -18,218 +18,304 @@
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     --glow-shadow: 0 0 15px var(--accent-glow);
+
+    /* ---- Variabel untuk Tema Terang ---- */
+    --body-bg-light: #f8f8f8;
+    --body-text-light: #333;
+    --header-bg-light: rgba(255, 255, 255, 0.95);
+    --header-border-light: #e5e7eb;
+    --section-bg-light: #fff;
+    --section-shadow-light: 0 2px 5px rgba(0,0,0,0.05);
+    --card-bg-main-light: #f9fafb;
+    --text-dark-light: #1f2937;
+    --text-medium-light: #4b5563;
+    --text-light-light: #6b7280;
+    --input-border-light: #d1d5db;
+    --nav-active-bg-light: #f3f4f6;
+
+    /* ---- Variabel untuk Tema Gelap (Aksen Dark Grey, Black, White) ---- */
+    --body-bg-dark: #121212; /* Hampir hitam, sebagai latar belakang utama */
+    --body-text-dark: #e0e0e0; /* Teks putih keabuan terang */
+    --header-bg-dark: rgba(25, 25, 25, 0.95); /* Sedikit lebih terang dari body untuk header */
+    --header-border-dark: #333333; /* Border abu-abu gelap */
+    --section-bg-dark: #1a1a1a; /* Latar belakang bagian lebih gelap */
+    --section-shadow-dark: 0 2px 10px rgba(0,0,0,0.5); /* Bayangan lebih gelap */
+    --card-bg-main-dark: #242424; /* Latar belakang kartu abu-abu gelap */
+    --text-dark-dark: #ffffff; /* Judul dan elemen penting berwarna putih */
+    --text-medium-dark: #cccccc; /* Teks menengah abu-abu terang */
+    --text-light-dark: #999999; /* Teks ringan abu-abu */
+    --input-border-dark: #555555; /* Border input abu-abu */
+    --nav-active-bg-dark: #3a3a3a; /* Latar belakang navigasi aktif abu-abu gelap */
+
+
+    /* Mode Terang (Default) */
+    --body-bg: var(--body-bg-light);
+    --body-text: var(--body-text-light);
+    --header-bg: var(--header-bg-light);
+    --header-border: var(--header-border-light);
+    --section-bg: var(--section-bg-light);
+    --section-shadow: var(--section-shadow-light);
+    --card-bg-main: var(--card-bg-main-light);
+    --text-dark: var(--text-dark-light);
+    --text-medium: var(--text-medium-light);
+    --text-light: var(--text-light-light);
+    --input-border: var(--input-border-light);
+    --nav-active-bg: var(--nav-active-bg-light);
 }
+
+/* ---- Gaya Dark Mode KONDISIONAL (ketika body memiliki kelas .dark-mode) ---- */
+body.dark-mode {
+    --body-bg: var(--body-bg-dark);
+    --body-text: var(--body-text-dark);
+    --header-bg: var(--header-bg-dark);
+    --header-border: var(--header-border-dark);
+    --section-bg: var(--section-bg-dark);
+    --section-shadow: var(--section-shadow-dark);
+    --card-bg-main: var(--card-bg-main-dark);
+    --text-dark: var(--text-dark-dark);
+    --text-medium: var(--text-medium-dark);
+    --text-light: var(--text-light-dark);
+    --input-border: var(--input-border-dark);
+    --nav-active-bg: var(--nav-active-bg-dark);
+
+    /* Gaya khusus untuk elemen di Dark Mode */
+    .carousel-slide .slide-content {
+        /* Sesuaikan background transparan ke hitam untuk dark mode */
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        color: white; /* Pastikan teks carousel tetap putih */
+    }
+
+    .carousel-indicators .indicator {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    .carousel-indicators .indicator.active {
+        background-color: white;
+    }
+
+    /* Sesuaikan ikon toggle dark mode */
+    .dark-mode-label .fa-sun {
+        color: #f0f0f0; /* Matahari putih di mode gelap */
+    }
+
+    .dark-mode-label .fa-moon {
+        color: #666666; /* Bulan abu-abu gelap di mode gelap */
+    }
+
+    .dark-mode-label .ball {
+        background-color: white; /* Bola toggle putih */
+    }
+
+    .dark-mode-switch:checked + .dark-mode-label {
+        background-color: #6366f1; /* Warna toggle aktif (biru) tetap sama */
+    }
+}
+
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Memastikan padding dan border disertakan dalam lebar/tinggi elemen */
+    box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth; /* Mengaktifkan gulir yang mulus */
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Inter", sans-serif; /* Font utama */
-    line-height: 1.6; /* Tinggi baris untuk keterbacaan */
-    color: #333; /* Warna teks gelap */
-    background-color: #f8f8f8; /* Latar belakang halaman keseluruhan (abu-abu muda) */
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    color: var(--body-text);
+    background-color: var(--body-bg);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transisi untuk dark mode */
 }
 
 .container {
-    max-width: 1200px; /* Lebar maksimum konten */
-    margin: 0 auto; /* Pusatkan container */
-    padding: 0 20px; /* Padding samping */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Gaya Header */
 .header {
-    position: fixed; /* Header tetap di atas saat digulir */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95); /* Latar belakang putih semi-transparan */
-    backdrop-filter: blur(10px); /* Efek blur di belakang header */
-    border-bottom: 1px solid #e5e7eb; /* Garis bawah header */
-    z-index: 1000; /* Pastikan header di atas elemen lain */
-    transition: all 0.3s ease; /* Transisi halus untuk perubahan gaya */
+    background: var(--header-bg); /* Menggunakan variabel untuk background */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--header-border); /* Menggunakan variabel untuk border */
+    z-index: 1000;
+    transition: all 0.3s ease; /* Transisi untuk perubahan warna yang mulus */
 }
 
 .header-content {
-    display: flex; /* Gunakan flexbox untuk tata letak konten header */
-    justify-content: space-between; /* Spasi antara elemen */
-    align-items: center; /* Pusatkan secara vertikal */
-    padding: 1rem 0; /* Padding atas dan bawah */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
 }
 
 .profile-info {
-    display: flex; /* Gunakan flexbox untuk info profil */
-    align-items: center; /* Pusatkan secara vertikal */
-    gap: 1rem; /* Jarak antar elemen */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .profile-photo {
     width: 60px;
     height: 60px;
-    border-radius: 50%; /* Membuat lingkaran */
-    overflow: hidden; /* Sembunyikan bagian gambar yang keluar */
-    border: 3px solid #6366f1; /* Border biru konsisten */
-    transition: transform 0.3s ease; /* Transisi halus saat di-hover */
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #6366f1;
+    transition: transform 0.3s ease;
 }
 
 .profile-photo:hover {
-    transform: scale(1.05); /* Sedikit membesar saat di-hover */
+    transform: scale(1.05);
 }
 
 .profile-photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Pastikan gambar mengisi seluruh area */
+    object-fit: cover;
 }
 
 .profile-name h1 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1f2937; /* Warna judul */
+    color: var(--text-dark); /* Menggunakan variabel teks gelap */
     margin-bottom: 0.25rem;
 }
 
 .profile-name p {
     font-size: 0.875rem;
-    color: #6b7280; /* Warna teks sekunder */
+    color: var(--text-light); /* Menggunakan variabel teks terang */
     font-weight: 400;
 }
 
 .navigation {
-    display: flex; /* Gunakan flexbox untuk navigasi */
+    display: flex;
     align-items: center;
 }
 
 .nav-links {
-    display: flex; /* Gunakan flexbox untuk tautan navigasi */
-    list-style: none; /* Hapus bullet point daftar */
-    gap: 2rem; /* Jarak antar tautan */
+    display: flex;
+    list-style: none;
+    gap: 2rem;
 }
 
 .nav-link {
-    text-decoration: none; /* Hapus garis bawah tautan */
-    color: #4b5563; /* Warna tautan */
+    text-decoration: none;
+    color: var(--text-medium); /* Menggunakan variabel teks menengah */
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    transition: all 0.3s ease; /* Transisi halus untuk perubahan gaya */
+    transition: all 0.3s ease;
     position: relative;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: #6366f1; /* Warna biru saat di-hover atau aktif */
-    background-color: #f3f4f6; /* Latar belakang abu-abu muda saat di-hover atau aktif */
+    color: #6366f1;
+    background-color: var(--nav-active-bg); /* Menggunakan variabel latar belakang navigasi aktif */
 }
 
 .mobile-menu-toggle {
-    display: none; /* Tersembunyi secara default, ditampilkan di media queries */
-    flex-direction: column; /* Susun garis vertikal */
-    cursor: pointer; /* Ubah kursor menjadi pointer */
-    gap: 4px; /* Jarak antar garis */
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+    margin-left: 1rem; /* Beri sedikit jarak dari toggle dark mode di mobile */
 }
 
 .mobile-menu-toggle span {
     width: 25px;
     height: 3px;
-    background-color: #4b5563; /* Warna garis toggle */
-    transition: all 0.3s ease; /* Transisi halus */
+    background-color: var(--text-medium); /* Menggunakan variabel teks menengah */
+    transition: all 0.3s ease;
 }
 
 /* Konten Utama */
 .main-content {
-    margin-top: 100px; /* Beri ruang untuk header tetap */
+    margin-top: 100px;
 }
 
 .section {
-    padding: 4rem 0; /* Padding atas dan bawah untuk setiap bagian */
-    background-color: #fff; /* Latar belakang putih untuk bagian */
-    margin-bottom: 20px; /* Jarak antar bagian */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan lembut */
-    border-radius: 8px; /* Sudut membulat */
+    padding: 4rem 0;
+    background-color: var(--section-bg);
+    margin-bottom: 20px;
+    box-shadow: var(--section-shadow);
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hapus margin-bottom dari bagian terakhir jika diperlukan, atau biarkan ditangani oleh padding container */
 .section:last-of-type {
     margin-bottom: 0;
 }
 
-
 .section-header {
-    text-align: center; /* Pusatkan teks header bagian */
-    margin-bottom: 3rem; /* Jarak bawah header bagian */
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .section-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1f2937; /* Warna judul bagian */
+    color: var(--text-dark);
     margin-bottom: 1rem;
 }
 
 .section-header p {
     font-size: 1.125rem;
-    color: #6b7280; /* Warna teks deskripsi bagian */
+    color: var(--text-light);
     max-width: 600px;
-    margin: 0 auto; /* Pusatkan paragraf */
+    margin: 0 auto;
 }
 
 /* Gaya Carousel */
 .carousel-container {
-    margin-bottom: 3rem; /* Jarak bawah container carousel */
+    margin-bottom: 3rem;
 }
 
 .carousel {
     position: relative;
-    max-width: 900px; /* Lebar maksimum carousel */
-    margin: 0 auto; /* Pusatkan carousel */
+    max-width: 900px;
+    margin: 0 auto;
     border-radius: 1rem;
-    overflow: hidden; /* Sembunyikan konten yang melampaui batas */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Bayangan kompleks */
+    overflow: hidden;
+    box-shadow: var(--section-shadow);
 }
 
 .carousel-track {
     position: relative;
     height: 400px;
-    display: flex; /* Mengubah menjadi flex untuk pengelolaan slide yang lebih mudah */
-    transition: transform 0.5s ease-in-out; /* Transisi halus untuk slide */
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .carousel-slide {
-    min-width: 100%; /* Setiap slide mengambil lebar penuh */
+    min-width: 100%;
     height: 100%;
-    display: flex; /* Pastikan konten di dalamnya sejajar */
+    display: flex;
     align-items: center;
     justify-content: center;
-    position: relative; /* Untuk overlay konten */
-    flex-shrink: 0; /* Mencegah penyusutan */
-}
-
-/* Kita tidak lagi memerlukan .carousel-slide.active untuk opacity langsung, JS menangani transform */
-/* Pertahankan untuk status awal jika diperlukan */
-.carousel-slide.active {
-    /* Tidak ada gaya spesifik yang diperlukan di sini, dikelola oleh transform JS */
+    position: relative;
+    flex-shrink: 0;
 }
 
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Pastikan gambar mengisi seluruh area */
+    object-fit: cover;
 }
 
 .slide-content {
-    position: absolute; /* Posisikan konten di atas gambar */
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 1)); /* Gradien transparan ke gelap */
-    color: white; /* Warna teks putih */
+    background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+    color: white;
     padding: 2rem;
     text-align: center;
 }
@@ -247,100 +333,100 @@ body {
 }
 
 .project-tags {
-    display: flex; /* Gunakan flexbox untuk tag proyek */
-    justify-content: center; /* Pusatkan tag */
-    gap: 0.5rem; /* Jarak antar tag */
-    flex-wrap: wrap; /* Izinkan tag untuk membungkus ke baris berikutnya */
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .tag {
-    background-color: rgba(255, 255, 255, 0.2); /* Latar belakang tag semi-transparan */
-    color: white; /* Warna teks tag */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
     padding: 0.25rem 0.75rem;
-    border-radius: 1rem; /* Sudut membulat */
+    border-radius: 1rem;
     font-size: 0.75rem;
     font-weight: 500;
 }
 
 .carousel-indicators {
-    position: absolute; /* Posisikan indikator di atas carousel */
+    position: absolute;
     bottom: 1rem;
     left: 50%;
-    transform: translateX(-50%); /* Pusatkan secara horizontal */
-    display: flex; /* Gunakan flexbox untuk indikator */
-    gap: 0.5rem; /* Jarak antar indikator */
-    z-index: 10; /* Pastikan indikator dapat diklik */
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
 }
 
 .indicator {
     width: 12px;
     height: 12px;
-    border-radius: 50%; /* Membuat lingkaran */
+    border-radius: 50%;
     border: none;
-    background-color: rgba(255, 255, 255, 0.5); /* Warna indikator semi-transparan */
-    cursor: pointer; /* Ubah kursor menjadi pointer */
-    transition: all 0.3s ease; /* Transisi halus */
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .indicator.active {
-    background-color: white; /* Warna putih saat aktif */
-    transform: scale(1.2); /* Sedikit membesar saat aktif */
+    background-color: white;
+    transform: scale(1.2);
 }
 
 /* Detail Profil */
 .profile-details {
-    display: grid; /* Gunakan grid untuk tata letak detail profil */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kolom responsif */
-    gap: 2rem; /* Jarak antar item grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
     margin-top: 3rem;
 }
 
 .detail-card {
-    text-align: center; /* Pusatkan teks */
+    text-align: center;
     padding: 2rem;
     border-radius: 1rem;
-    background-color: #f9fafb; /* Latar belakang kartu detail */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi halus */
+    background-color: var(--card-bg-main);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .detail-card:hover {
-    transform: translateY(-5px); /* Geser sedikit ke atas saat di-hover */
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan saat di-hover */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .detail-card i {
     font-size: 2.5rem;
-    color: #6366f1; /* Warna ikon */
+    color: #6366f1;
     margin-bottom: 1rem;
 }
 
 .detail-card h4 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #1f2937; /* Warna judul kartu */
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
 }
 
 .detail-card p {
-    color: #6b7280; /* Warna teks deskripsi kartu */
+    color: var(--text-light);
 }
 
-/* Bagian Portofolio (tidak ada gaya spesifik selain .section) */
+/* Bagian Portofolio */
 .portfolio-section {
-    background-color: #f9fafb; /* Latar belakang sedikit berbeda untuk pemisahan visual */
+    background-color: var(--card-bg-main);
 }
 
 /* Bagian Kontak */
 .contact-content {
-    display: flex; /* Menggunakan flexbox untuk menempatkan form dan output box berdampingan */
-    flex-wrap: wrap; /* Memungkinkan item untuk pindah ke baris berikutnya pada layar kecil */
-    gap: 2rem; /* Jarak antara form dan output box, disesuaikan dengan gap di .contact-content sebelumnya */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
     max-width: 1000px;
-    margin: 0 auto; /* Pusatkan konten kontak */
-    justify-content: center; /* Pusatkan elemen jika ada ruang kosong */
+    margin: 0 auto;
+    justify-content: center;
 }
 
-.contact-info { /* Ini untuk info kontak di samping form, jika ingin dipakai. */
+.contact-info {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -362,12 +448,12 @@ body {
 .contact-item h4 {
     font-size: 1.125rem;
     font-weight: 600;
-    color: #1f2937;
+    color: var(--text-dark);
     margin-bottom: 0.25rem;
 }
 
 .contact-item p {
-    color: #6b7280;
+    color: var(--text-light);
 }
 
 .social-links {
@@ -396,105 +482,178 @@ body {
 
 /* Formulir Kontak */
 .contact-form {
-    flex: 1; /* Memungkinkan kedua elemen untuk tumbuh dan menyusut */
-    min-width: 300px; /* Lebar minimum sebelum wrap */
-    background-color: #f9fafb; /* Latar belakang formulir */
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--card-bg-main);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan lembut */
+    box-shadow: var(--section-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Gaya khusus untuk Output Box */
 .output-box {
-    flex: 1; /* Memungkinkan kedua elemen untuk tumbuh dan menyusut */
-    min-width: 300px; /* Lebar minimum sebelum wrap */
-    padding: 2rem; /* Padding disesuaikan dengan .contact-form yang sudah ada */
-    border-radius: 1rem; /* Border-radius disesuaikan dengan .contact-form yang sudah ada */
-    background-color: #f9fafb; /* Latar belakang disesuaikan dengan .contact-form yang sudah ada */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan lembut */
+    flex: 1;
+    min-width: 300px;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--card-bg-main);
+    box-shadow: var(--section-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .output-box h3 {
-    font-size: 1.25rem; /* Ukuran font disesuaikan */
+    font-size: 1.25rem;
     font-weight: 600;
-    color: #1f2937; /* Warna judul disesuaikan */
-    margin-bottom: 1.5rem; /* Memberi ruang di bawah judul */
-    text-align: center; /* Pusatkan judul */
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .output-box p {
-    font-size: 1rem; /* Ukuran font disesuaikan */
-    color: #6b7280; /* Warna teks disesuaikan */
-    margin-bottom: 0.75rem; /* Jarak antar paragraf */
-    word-wrap: break-word; /* Memastikan teks panjang tidak meluber */
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+    word-wrap: break-word;
 }
 
 .output-box p strong {
-    color: #374151; /* Warna untuk label strong */
+    color: var(--text-dark);
     font-weight: 500;
     margin-right: 0.5rem;
 }
 
 
 .form-group {
-    margin-bottom: 1.5rem; /* Jarak bawah antar grup formulir */
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
-    display: block; /* Buat label menjadi blok */
+    display: block;
     font-weight: 500;
-    color: #374151; /* Warna teks label */
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
 }
 
 .form-group input,
 .form-group textarea {
-    width: 100%; /* Lebar penuh */
+    width: 100%;
     padding: 0.75rem;
-    border: 1px solid #d1d5db; /* Border abu-abu */
+    border: 1px solid var(--input-border);
     border-radius: 0.5rem;
     font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transisi halus */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    background-color: var(--section-bg);
+    color: var(--body-text);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none; /* Hapus outline default saat fokus */
-    border-color: #6366f1; /* Border biru saat fokus */
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); /* Bayangan saat fokus */
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .submit-btn {
-    width: 100%; /* Lebar penuh */
-    background-color: #6366f1; /* Latar belakang biru */
-    color: white; /* Warna teks putih */
+    width: 100%;
+    background-color: #6366f1;
+    color: white;
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: 600;
-    cursor: pointer; /* Ubah kursor menjadi pointer */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transisi halus */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .submit-btn:hover {
-    background-color: #4f46e5; /* Warna lebih gelap saat di-hover */
-    transform: translateY(-1px); /* Geser sedikit ke atas saat di-hover */
+    background-color: #4f46e5;
+    transform: translateY(-1px);
 }
 
 /* Footer */
 .footer {
-    background-color: #1f2937; /* Latar belakang gelap */
-    color: white; /* Warna teks putih */
+    background-color: #1f2937;
+    color: white;
     text-align: center;
     padding: 2rem 0;
-    margin-top: 20px; /* Tambahkan sedikit ruang di atas footer */
+    margin-top: 20px;
 }
+
+/* ---- Gaya untuk Dark Mode Toggle ---- */
+.dark-mode-toggle-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem; /* Sesuaikan jarak dari navigasi */
+    cursor: pointer;
+    order: 2; /* Agar berada di kanan tombol menu di mobile */
+}
+
+.dark-mode-switch {
+    display: none; /* Sembunyikan checkbox asli */
+}
+
+.dark-mode-label {
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.dark-mode-label .fas {
+    color: #fff; /* Warna ikon di mode gelap */
+    font-size: 14px;
+    z-index: 1;
+}
+
+.dark-mode-label .fa-sun {
+    color: #f39c12; /* Warna matahari default (light mode) */
+}
+
+.dark-mode-label .fa-moon {
+    color: #34495e; /* Warna bulan default (light mode) */
+}
+
+.dark-mode-label .ball {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.dark-mode-switch:checked + .dark-mode-label {
+    background-color: #4CAF50; /* Warna hijau saat aktif (dark mode) - ini akan ditimpa oleh dark-mode class */
+}
+
+.dark-mode-switch:checked + .dark-mode-label .ball {
+    transform: translateX(30px);
+}
+
+/* Sesuaikan ikon saat dark mode aktif */
+body.dark-mode .dark-mode-label {
+    background-color: #555; /* Warna toggle di dark mode */
+}
+body.dark-mode .dark-mode-switch:checked + .dark-mode-label {
+    background-color: #6366f1; /* Warna tombol aktif di dark mode (biru) */
+}
+
 
 /* Desain Responsif */
 @media (max-width: 768px) {
     .header-content {
-        flex-direction: column; /* Tata letak kolom pada layar kecil */
+        flex-direction: column;
         gap: 1rem;
         padding: 1rem 0;
     }
@@ -513,6 +672,12 @@ body {
         font-size: 0.875rem;
     }
 
+    .navigation {
+        width: 100%; /* Pastikan navigasi mengambil lebar penuh */
+        justify-content: space-between; /* Untuk menempatkan toggle dan menu mobile */
+        padding: 0 20px; /* Sesuaikan padding untuk mobile */
+    }
+
     .nav-links {
         display: none; /* Sembunyikan secara default di mobile */
         flex-direction: column;
@@ -520,19 +685,21 @@ body {
         top: 100%;
         left: 0;
         right: 0;
-        background: white;
-        border-top: 1px solid #e5e7eb;
+        background: var(--header-bg); /* Sesuaikan dengan header di dark mode */
+        border-top: 1px solid var(--header-border); /* Sesuaikan dengan header di dark mode */
         padding: 1rem;
         gap: 0.5rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Tambahkan bayangan ke menu dropdown */
+        box-shadow: var(--section-shadow); /* Sesuaikan dengan shadow di dark mode */
+        z-index: 999; /* Pastikan menu dropdown di atas konten */
     }
 
     .nav-links.active {
-        display: flex; /* Tampilkan saat aktif */
+        display: flex;
     }
 
     .mobile-menu-toggle {
         display: flex; /* Tampilkan di mobile */
+        order: 3; /* Pindahkan ke paling kanan di tatanan flexbox */
     }
 
     .section-header h2 {
@@ -540,7 +707,7 @@ body {
     }
 
     .carousel-track {
-        height: 300px; /* Sesuaikan tinggi carousel */
+        height: 300px;
     }
 
     .slide-content {
@@ -552,28 +719,36 @@ body {
     }
 
     .profile-details {
-        grid-template-columns: 1fr; /* Satu kolom pada layar kecil */
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
-    /* Penyesuaian responsif untuk contact-content */
     .contact-content {
-        flex-direction: column; /* Ubah kembali ke kolom pada layar kecil */
-        gap: 2rem; /* Jarak antar kolom */
+        flex-direction: column;
+        gap: 2rem;
     }
 
     .contact-form,
     .output-box {
-        flex-basis: auto; /* Biarkan flex menentukan basis, atau 100% */
-        width: 100%; /* Pastikan mengambil lebar penuh */
+        flex-basis: auto;
+        width: 100%;
     }
 
     .project-tags {
-        justify-content: center; /* Pusatkan tag proyek */
+        justify-content: center;
     }
 
     .section {
-        padding: 3rem 15px; /* Sesuaikan padding untuk mobile */
+        padding: 3rem 15px;
+    }
+
+    .dark-mode-toggle-container {
+        margin-left: 0;
+        justify-content: flex-end; /* Dorong ke kanan di mobile */
+        order: 1; /* Pindahkan ke kiri mobile agar sesuai dengan urutan logis */
+    }
+    .nav-links.active + .dark-mode-toggle-container {
+        padding-bottom: 0;
     }
 }
 
@@ -583,7 +758,7 @@ body {
     }
 
     .section {
-        padding: 2rem 10px; /* Sesuaikan padding lebih lanjut untuk mobile yang lebih kecil */
+        padding: 2rem 10px;
     }
 
     .carousel-track {
@@ -596,7 +771,7 @@ body {
 
     .contact-form,
     .output-box {
-        padding: 1.5rem; /* Sesuaikan padding untuk mobile yang lebih kecil */
+        padding: 1.5rem;
     }
 
     .output-box h3 {

@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // === Bagian Navigasi Mobile & Scroll Header ===
+
     // Toggle menu mobile
     const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
     const navLinks = document.querySelector(".nav-links");
+    const header = document.querySelector(".header"); // Pastikan ini dideklarasikan di scope yang benar
 
     if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener("click", () => {
@@ -11,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Smooth scrolling untuk tautan navigasi dan penyorotan tautan aktif
     const navLinksElements = document.querySelectorAll(".nav-link");
-    const header = document.querySelector(".header");
 
     navLinksElements.forEach((link) => {
         link.addEventListener("click", function (e) {
@@ -46,18 +48,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Efek scroll header (mengubah latar belakang dan bayangan header)
-    window.addEventListener("scroll", () => {
-        if (header) { // Periksa apakah elemen header ada
-            if (window.scrollY > 50) { // Jika digulir lebih dari 50px
-                header.style.background = "rgba(255, 255, 255, 0.98)"; // Latar belakang lebih solid
-                header.style.boxShadow = "0 4px 6px -1px rgba(0, 0, 0, 0.1)"; // Tambahkan bayangan
+    // Fungsi untuk memperbarui gaya header berdasarkan posisi scroll saat ini
+    function updateHeaderOnScrollState() {
+        if (header) {
+            // Ambil computed style dari body untuk mendapatkan nilai variabel CSS yang aktif
+            const computedStyle = getComputedStyle(document.body);
+
+            // Dapatkan nilai warna header dan bayangan berdasarkan tema yang aktif
+            const headerBg = computedStyle.getPropertyValue('--header-bg');
+            const sectionShadow = computedStyle.getPropertyValue('--section-shadow');
+
+            if (window.scrollY > 50) {
+                // Terapkan warna dan bayangan yang sesuai dengan tema aktif
+                header.style.background = headerBg;
+                header.style.boxShadow = sectionShadow;
             } else {
-                header.style.background = "rgba(255, 255, 255, 0.95)"; // Latar belakang sedikit transparan
-                header.style.boxShadow = "none"; // Hapus bayangan
+                // Kembali ke warna header default dari tema aktif
+                header.style.background = headerBg;
+                header.style.boxShadow = "none";
             }
         }
-    });
+    }
+
+    // Efek scroll header (mengubah latar belakang dan bayangan header)
+    window.addEventListener("scroll", updateHeaderOnScrollState);
 
     // Perbarui tautan navigasi aktif berdasarkan posisi gulir halaman
     window.addEventListener("scroll", () => {
@@ -93,90 +107,73 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     function initCarousel(carouselElement) {
         const carousel = carouselElement;
-        if (!carousel) return; // Keluar jika elemen carousel tidak ditemukan
+        if (!carousel) return;
 
         const track = carousel.querySelector(".carousel-track");
         const slides = Array.from(track.children);
         let indicatorsContainer = carousel.querySelector(".carousel-indicators");
 
-        // Buat atau bersihkan container indikator
         if (!indicatorsContainer) {
             indicatorsContainer = document.createElement('div');
             indicatorsContainer.classList.add('carousel-indicators');
             carousel.appendChild(indicatorsContainer);
         } else {
-            indicatorsContainer.innerHTML = ''; // Bersihkan indikator lama jika ada
+            indicatorsContainer.innerHTML = '';
         }
 
         let currentSlide = 0;
         let autoSlideInterval;
 
-        // Buat indikator untuk setiap slide
         slides.forEach((_, index) => {
             const indicator = document.createElement('button');
             indicator.classList.add('indicator');
-            if (index === 0) indicator.classList.add('active'); // Aktifkan indikator pertama
+            if (index === 0) indicator.classList.add('active');
             indicator.addEventListener("click", () => {
                 showSlide(index);
-                stopAutoSlide(); // Hentikan auto-slide saat navigasi manual
-                startAutoSlide(); // Mulai kembali auto-slide setelah pilihan manual
+                stopAutoSlide();
+                startAutoSlide();
             });
             indicatorsContainer.appendChild(indicator);
         });
 
-        const indicators = Array.from(indicatorsContainer.children); // Ambil ulang indikator setelah dibuat
+        const indicators = Array.from(indicatorsContainer.children);
 
-        /**
-         * Menampilkan slide tertentu berdasarkan indeks.
-         * @param {number} index - Indeks slide yang akan ditampilkan.
-         */
         function showSlide(index) {
-            // Pastikan indeks berputar untuk efek tak terbatas
             if (index >= slides.length) {
                 index = 0;
             } else if (index < 0) {
                 index = slides.length - 1;
             }
 
-            // Hitung transformasi X untuk menggeser track carousel
             const offset = -index * 100;
             track.style.transform = `translateX(${offset}%)`;
 
-            // Hapus kelas 'active' dari semua indikator
             indicators.forEach((indicator) => indicator.classList.remove("active"));
-            // Tambahkan kelas 'active' ke indikator saat ini
             indicators[index].classList.add("active");
-
             currentSlide = index;
         }
 
-        /** Menggeser ke slide berikutnya. */
         function nextSlide() {
             const nextIndex = (currentSlide + 1) % slides.length;
             showSlide(nextIndex);
         }
 
-        /** Memulai interval auto-slide. */
         function startAutoSlide() {
-            stopAutoSlide(); // Pastikan tidak ada interval ganda
-            autoSlideInterval = setInterval(nextSlide, 4000); // Ganti slide setiap 4 detik
+            stopAutoSlide();
+            autoSlideInterval = setInterval(nextSlide, 4000);
         }
 
-        /** Menghentikan interval auto-slide. */
         function stopAutoSlide() {
             clearInterval(autoSlideInterval);
         }
 
-        // Jeda/Lanjutkan auto-slide saat di-hover
         carousel.addEventListener("mouseenter", stopAutoSlide);
         carousel.addEventListener("mouseleave", startAutoSlide);
 
-        // Inisialisasi: tampilkan slide pertama dan mulai auto-slide
         showSlide(0);
         startAutoSlide();
     }
 
-    // Inisialisasi SEMUA carousel yang ada di halaman (PENTING untuk multiple carousels)
     const allCarousels = document.querySelectorAll(".carousel");
     allCarousels.forEach(carouselElement => {
         initCarousel(carouselElement);
@@ -189,28 +186,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (contactForm && resultBox) {
         contactForm.addEventListener("submit", function (e) {
-            e.preventDefault(); // Hindari reload halaman
+            e.preventDefault();
 
-            // Ambil nilai input dari form
             const nama = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const tanggallahir = document.getElementById('tanggallahir').value.trim();
             const pesan = document.getElementById('message').value.trim();
 
-            // Validasi dasar: Pastikan semua kolom wajib terisi
             if (!nama || !email || !tanggallahir || !pesan) {
                 alert("Harap isi semua kolom wajib (Nama, Email, Tanggal Lahir, Pesan).");
                 return;
             }
 
-            // Validasi format email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert("Harap masukkan alamat email yang valid.");
                 return;
             }
 
-            // Waktu saat ini (sesuai zona waktu Jakarta untuk "WIB")
             const now = new Date();
             const options = {
                 year: 'numeric', month: 'long', day: 'numeric',
@@ -219,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
             };
             const currentTime = now.toLocaleString('id-ID', options);
 
-            // Format tampilan hasil
             const hasil = `
                 <p><strong>Current time</strong>: ${currentTime}</p><br>
                 <p><strong>Nama</strong>: ${nama}</p>
@@ -228,12 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p><strong>Pesan</strong>: ${pesan}</p>
             `;
 
-            // Tampilkan ke resultBox
             resultBox.innerHTML = hasil;
 
-            // Simulasikan pengiriman formulir dan reset form
             const submitBtn = this.querySelector(".submit-btn");
-            const originalText = submitBtn ? submitBtn.textContent : 'Kirim Pesan'; // Teks default tombol
+            const originalText = submitBtn ? submitBtn.textContent : 'Kirim Pesan';
 
             if (submitBtn) {
                 submitBtn.textContent = "Mengirim...";
@@ -241,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 setTimeout(() => {
                     alert("Pesan Anda telah ditampilkan di kotak hasil!");
-                    this.reset(); // Reset formulir
+                    this.reset();
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                 }, 2000);
@@ -251,4 +241,52 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // === Fungsionalitas Dark Mode ===
+
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+    const body = document.body;
+
+    // Fungsi untuk menerapkan tema
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            body.classList.add('dark-mode');
+            if (darkModeToggle) darkModeToggle.checked = true;
+        } else {
+            body.classList.remove('dark-mode');
+            if (darkModeToggle) darkModeToggle.checked = false;
+        }
+        // Panggil fungsi ini untuk memperbarui gaya header setelah tema berubah
+        // Ini memastikan gaya header di-refresh jika sedang dalam kondisi scroll
+        updateHeaderOnScrollState();
+    }
+
+    // Periksa preferensi pengguna dari localStorage atau sistem operasi
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+
+    // Atur tema awal
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else if (prefersDarkMode) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light');
+    }
+
+    // Tambahkan event listener untuk toggle dark mode
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener("change", () => {
+            if (darkModeToggle.checked) {
+                applyTheme('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                applyTheme('light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+
+    // Panggil sekali saat DOM siap untuk memastikan header diatur dengan benar saat halaman dimuat
+    updateHeaderOnScrollState();
 });
