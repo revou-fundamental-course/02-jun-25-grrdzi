@@ -1,10 +1,10 @@
 /* Header Component */
 .main-header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     padding: 10px 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
 }
 
 .main-logo {
@@ -65,8 +65,8 @@ section{
     display: flex;
     flex-direction: column;
     margin: 20px;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 80px; 
+    margin-right: 80px; 
 }
 
 .profile-container{
@@ -98,7 +98,7 @@ section{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: flex-start;    
+    align-items: flex-start;      
     gap: 30px;
     margin-top: 40px;
     width: 100%;
@@ -111,6 +111,7 @@ section{
     align-items: center;
     margin-bottom: 15px;
     flex-wrap: wrap;
+    align-items: flex-start; 
 }
 
 .form-group label{
@@ -131,7 +132,7 @@ section{
 .form-group input[type="text"],
 .form-group input[type="date"],
 .form-group textarea {
-    flex: 1; /* Input dan textarea akan mengambil sisa ruang */
+    flex: 1; 
     min-width: 150px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -146,18 +147,6 @@ section{
 
 .form-group input[type="radio"] {
     margin-right: 5px;
-}
-
-.radio-group-wrapper{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    flex: 1;
-}
-
-.radio-group-wrapper label{
-    width: auto;
-    margin-right: 0;
 }
 
 .form-group label input[type="radio"] {
@@ -186,15 +175,15 @@ form {
     flex: 1;
     max-width: 500px;
     padding: 20px;
-    margin: 30x auto;
+    margin: 0 auto; 
 }
 
 .output-box{
     flex: 1;
-    margin-top: 50px;
     min-width: 300px;
     max-width: 500px;
-    margin: 0;
+    margin: 0 auto; 
+    
     border: 1px solid #ccc;
     padding: 15px;
     min-height: 230px;
@@ -211,34 +200,139 @@ form {
     width: 110px;
 }
 
-@media (max-width: 992px) {
-    .container {
-        flex-direction: column; /* Ubah menjadi tumpuk vertikal pada layar <= 992px */
-        align-items: center; /* Pusatkan item secara horizontal saat ditumpuk */
-    }
+/* --- Media Queries for Responsiveness --- */
 
-    form, .output-box {
-        max-width: 90%;
-        width: 100%; /* Ditambahkan/Ditekankan */
-        margin: 0 auto;
+/* For larger tablets and smaller desktops */
+@media (max-width: 1024px) {
+    .container-body {
+        margin-left: 40px;
+        margin-right: 40px;
     }
 }
 
-
-/* Untuk ponsel kecil (lebar kurang dari 576px) */
-@media (max-width: 576px) {
-    form, .output-box {
+/* For tablets (portrait) and larger phones */
+@media (max-width: 992px) {
+    .main-header {
+        flex-direction: column;
+        align-items: center;
         padding: 15px;
-        max-width: 95%; /* Ambil hampir lebar penuh pada layar sangat kecil */
     }
 
-    .output-box b {
-        width: auto; /* Izinkan label dalam output-box mengambil lebar alami */
-        display: block; /* Tumpuk label tebal untuk keterbacaan yang lebih baik */
-        margin-bottom: 5px;
+    .main-logo {
+        margin-left: 0; 
+        margin-bottom: 15px; 
+    }
+
+    nav {
+        width: 100%; 
+        justify-content: center; 
+        margin-top: 0; 
+    }
+
+    nav > a {
+        flex-grow: 1; 
+        text-align: center;
+        padding: 10px 5px; 
+        margin: 0 5px; 
+    }
+
+    .container-body {
+        margin: 20px; 
+    }
+
+    .container {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
+    }
+
+    form, .output-box {
+        max-width: 80%;
+        width: 100%;
+        margin: 0 auto; 
+    }
+}
+
+/* For smaller phones */
+@media (max-width: 576px) {
+    .main-header {
+        padding: 10px;
+    }
+
+    nav {
+        flex-direction: column; 
+        gap: 10px; 
+    }
+
+    nav > a {
+        width: 90%; 
+        margin: 0 auto; 
+    }
+
+    h1 {
+        font-size: 1.8em; 
+    }
+
+    .container-body {
+        margin: 10px; 
+    }
+
+    .banner-img {
+        height: 250px; 
+    }
+
+    .profile-item {
+        flex: 1 1 120px; 
+        max-width: 150px; 
+    }
+
+    .profile-item img {
+        width: 120px;
+        height: 120px;
+    }
+
+    form, .output-box {
+        padding: 15px;
+        max-width: 95%; 
+        margin: 0 auto;
+    }
+
+    .form-group {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .form-group label {
+        width: auto; 
+        margin-right: 0;
+        margin-bottom: 5px; 
+    }
+
+    .form-group .colon {
+        display: none; 
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group textarea {
+        width: 100%; 
+        min-width: unset; 
+    }
+
+    .form-group label input[type="radio"] {
+        display: inline-block; 
+        margin-right: 5px;
+        width: auto;
     }
 
     .form-group input[type="submit"] {
-        width: 100%; /* Tombol submit mengambil lebar penuh */
+        width: 100%; 
+        margin-left: 0; 
+    }
+
+    .output-box b {
+        width: auto; 
+        display: block; 
+        margin-bottom: 5px;
     }
 }
