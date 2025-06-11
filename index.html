@@ -3,112 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Website</title>
-
+    <title>Carlos Gerardi - Portfolio</title>
     <link rel="stylesheet" href="css/style.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header Content -->
-    <header class="main-header">
-        <!-- Logo Website -->
-         <div class="main-logo"></div>
-
-         <!-- Navbar -->
-          <nav>
-            <a href="#home">Home</a>
-            <a href="#our-profile">Our Profile</a>
-            <a href="#message-us">Message Us</a>
-          </nav>
-    </header>
-
-    <hr/>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Home Section -->
-        <div class="container-body">
-            <section id="home">
-                <h1>Hi there, welcome to my portfolio website!</h1>
-                <p>My name is Carlos Gerardi, I am a Junior Website Developer.</p>
-
-                <!-- Banner Section -->
-                <div class="banner-img"></div>
-            </section>
-        </div>
-        <hr />
-
-        <!-- Our Profile Section -->
-        <div class="container-body">
-            <section id="our-profile">
-                <h1>Our Profile</h1>
-                <p>We are a team of passionate developers.</p>
-
-                <div class="profile-container">
-                    <div class="profile-item">
-                        <img src="https://picsum.photos/200" alt="Profile 1">
-                        <p>Alice</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-info">
+                    <div class="profile-photo">
+                        <img src="assets/foto.PNG" alt="Alex Johnson">
                     </div>
-                    <div class="profile-item">
-                        <img src="https://picsum.photos/200" alt="Profile 2">
-                        <p>Bob</p>
-                    </div>
-                    <div class="profile-item">
-                        <img src="https://picsum.photos/200" alt="Profile 3">
-                        <p>Charlie</p>
+                    <div class="profile-name">
+                        <h1>Carlos Gerardi</h1>
+                        <p>Creative Designer & Developer</p>
                     </div>
                 </div>
-            </section>
+                <nav class="navigation">
+                    <ul class="nav-links">
+                        <li><a href="#profile" class="nav-link active">My Profile</a></li>
+                        <li><a href="#portfolio" class="nav-link">My Portfolio</a></li>
+                        <li><a href="#contact" class="nav-link">Contact Us</a></li>
+                    </ul>
+                    <div class="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </nav>
+            </div>
         </div>
-        <hr />
-        
-        <div class="container-body">
-            <!-- Message Us Section -->
-            <section id="message-us">
-                <h1>Message Us</h1>
-                <p>If you have any questions, feel free to reach out!</p>
+    </header>
 
-                <div class="container">
-                    <form id="messageForm">
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- My Profile Section -->
+        <section id="profile" class="section profile-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>My Profile</h2>
+                    <p>Passionate about creating beautiful and functional digital experiences</p>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel profile-carousel">
+                        <div class="carousel-track">
+                            <div class="carousel-slide active">
+                                <img src="assets/vismis.png" alt="Visi Kreatif"> <div class="slide-content">
+                                    <h3>Membangun Pengalaman Digital yang Berdampak</h3>
+                                    <p>Menggabungkan desain intuitif dan teknologi mutakhir untuk menciptakan solusi yang relevan dan berkesan.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/skills.png" alt="Keahlian Teknis"> <div class="slide-content">
+                                    <h3>Keahlian UI/UX & Pengembangan Full-Stack</h3>
+                                    <p>Dari wireframe hingga deployment, saya menghidupkan ide dengan detail dan presisi, baik di sisi front-end maupun back-end.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/collab.png" alt="Kolaborasi Tim"> <div class="slide-content">
+                                    <h3>Inovasi melalui Kolaborasi</h3>
+                                    <p>Saya percaya pada kekuatan kerja sama tim dan komunikasi terbuka untuk mencapai hasil yang luar biasa dan melampaui harapan.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-indicators">
+                            <button class="indicator active" data-slide="0"></button>
+                            <button class="indicator" data-slide="1"></button>
+                            <button class="indicator" data-slide="2"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <div class="detail-card">
+                        <i class="fas fa-code"></i>
+                        <h4>Development</h4>
+                        <p>Full-stack development with modern frameworks and technologies</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-paint-brush"></i>
+                        <h4>Design</h4>
+                        <p>Creating intuitive and visually appealing user interfaces</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Innovation</h4>
+                        <p>Always exploring new ideas and pushing creative boundaries</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Portfolio Section -->
+        <section id="portfolio" class="section portfolio-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>My Portfolio</h2>
+                    <p>A showcase of my recent projects and creative work</p>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel portfolio-carousel">
+                        <div class="carousel-track">
+                            <div class="carousel-slide active">
+                                <img src="assets/gym.png" alt="Portfolio Project 1">
+                                <div class="slide-content">
+                                    <h3>Gym Class Platform</h3>
+                                    <p>Intuitive fitness or gym class and tracking app with beautiful UI/UX design</p>
+                                    <div class="project-tags">
+                                        <span class="tag">HTML</span>
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">JavaScript</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/hiphop.png" alt="Portfolio Project 2">
+                                <div class="slide-content">
+                                    <h3>Hip-Hop Journey Landing Page</h3>
+                                    <p>Visually stunning landing page designed for a captivating journey through the evolution of hip-hop.</p>
+                                    <div class="project-tags">
+                                        <span class="tag">HTML</span>
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">JavaScript</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="assets/computer.png" alt="Portfolio Project 3">
+                                <div class="slide-content">
+                                    <h3>PC Build E-Commerce</h3>
+                                    <p>Modern online PC shopping experience with seamless user journey</p>
+                                    <div class="project-tags">
+                                        <span class="tag">HTML</span>
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">JavaScript</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-indicators">
+                            <button class="indicator active" data-slide="0"></button>
+                            <button class="indicator" data-slide="1"></button>
+                            <button class="indicator" data-slide="2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                    <p>Let's work together to bring your ideas to life</p>
+                </div>
+                <div class="contact-content"> <div class="contact-form">
+                    <form>
                         <div class="form-group">
-                            <label for="name">Nama</label>
-                            <span class="colon">:</span>
-                            <input type="text" id="name" name="name">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="tanggallahir">Tanggal Lahir</label>
-                            <span class="colon">:</span>
-                            <input type="date" id="tanggallahir" name="tanggallahir">
+                            <input type="date" id="tanggallahir" name="tanggallahir" required>
                         </div>
                         <div class="form-group">
-                            <label for="name">Jenis Kelamin</label>
-                            <span class="colon">:</span>
-                            <label><input type="radio" value="Laki-Laki" name="jeniskelamin">Laki-Laki</label>
-                            <label><input type="radio" value="Perempuan" name="jeniskelamin">Perempuan</label>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="name">Pesan</label>
-                            <span class="colon">:</span>
-                            <textarea id="pesan" name="pesan" rows="7" cols="48"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Submit">
-                        </div>
-                    </form>
-
-                    <div class="output-box" id="resultBox"></div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                </form>
                 </div>
-            </section>
-        </div>
-        <hr>
+                    <div class="output-box"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer Content -->
-    <footer>
-        <h1>Message Us</h1>
-        <p></p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Carlos Gerardi. All rights reserved.</p>
+        </div>
     </footer>
-</body>
 
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
+</body>
 </html>

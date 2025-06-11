@@ -1,338 +1,622 @@
-/* Header Component */
-.main-header{
-    display: flex;
-    justify-content: space-between; 
+/* Gaya Dasar */
+:root {
+    /* Mempertahankan warna asli, meskipun beberapa tidak sepenuhnya digunakan dalam HTML saat ini. */
+    --primary-color: #6e3adc;
+    --primary-light: #8f65e6;
+    --primary-dark: #4a1db0;
+    --accent-color: #00e5ff;
+    --accent-glow: rgba(0, 229, 255, 0.5);
+    /* Warna latar belakang terkait efek ruang angkasa, yang sudah dihapus */
+    --background-dark: #0a0a1a;
+    --background-darker: #050510;
+    --background-light: #1a1a2e;
+    --text-color: #ffffff; /* Ini tidak akan terlihat di bagian latar belakang putih */
+    --text-secondary: #b3b3cc;
+    --text-tertiary: #7575a3;
+    --border-color: rgba(110, 58, 220, 0.3);
+    --card-bg: rgba(26, 26, 46, 0.7); /* Ini tidak akan terlihat di bagian latar belakang putih */
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --glow-shadow: 0 0 15px var(--accent-glow);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Memastikan padding dan border disertakan dalam lebar/tinggi elemen */
+}
+
+html {
+    scroll-behavior: smooth; /* Mengaktifkan gulir yang mulus */
+}
+
+body {
+    font-family: "Inter", sans-serif; /* Font utama */
+    line-height: 1.6; /* Tinggi baris untuk keterbacaan */
+    color: #333; /* Warna teks gelap */
+    background-color: #f8f8f8; /* Latar belakang halaman keseluruhan (abu-abu muda) */
+}
+
+.container {
+    max-width: 1200px; /* Lebar maksimum konten */
+    margin: 0 auto; /* Pusatkan container */
+    padding: 0 20px; /* Padding samping */
+}
+
+/* Gaya Header */
+.header {
+    position: fixed; /* Header tetap di atas saat digulir */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95); /* Latar belakang putih semi-transparan */
+    backdrop-filter: blur(10px); /* Efek blur di belakang header */
+    border-bottom: 1px solid #e5e7eb; /* Garis bawah header */
+    z-index: 1000; /* Pastikan header di atas elemen lain */
+    transition: all 0.3s ease; /* Transisi halus untuk perubahan gaya */
+}
+
+.header-content {
+    display: flex; /* Gunakan flexbox untuk tata letak konten header */
+    justify-content: space-between; /* Spasi antara elemen */
+    align-items: center; /* Pusatkan secara vertikal */
+    padding: 1rem 0; /* Padding atas dan bawah */
+}
+
+.profile-info {
+    display: flex; /* Gunakan flexbox untuk info profil */
+    align-items: center; /* Pusatkan secara vertikal */
+    gap: 1rem; /* Jarak antar elemen */
+}
+
+.profile-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Membuat lingkaran */
+    overflow: hidden; /* Sembunyikan bagian gambar yang keluar */
+    border: 3px solid #6366f1; /* Border biru konsisten */
+    transition: transform 0.3s ease; /* Transisi halus saat di-hover */
+}
+
+.profile-photo:hover {
+    transform: scale(1.05); /* Sedikit membesar saat di-hover */
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pastikan gambar mengisi seluruh area */
+}
+
+.profile-name h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937; /* Warna judul */
+    margin-bottom: 0.25rem;
+}
+
+.profile-name p {
+    font-size: 0.875rem;
+    color: #6b7280; /* Warna teks sekunder */
+    font-weight: 400;
+}
+
+.navigation {
+    display: flex; /* Gunakan flexbox untuk navigasi */
     align-items: center;
-    padding: 10px 20px;
-    flex-wrap: wrap; 
 }
 
-.main-logo {
-    margin-left: 20px;
-    height: 50px;
-    width: 50px;
-    background-image: url(https://picsum.photos/200);
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    flex-shrink: 0;
+.nav-links {
+    display: flex; /* Gunakan flexbox untuk tautan navigasi */
+    list-style: none; /* Hapus bullet point daftar */
+    gap: 2rem; /* Jarak antar tautan */
 }
 
-/* Navbar Component */
-nav{
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
+.nav-link {
+    text-decoration: none; /* Hapus garis bawah tautan */
+    color: #4b5563; /* Warna tautan */
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease; /* Transisi halus untuk perubahan gaya */
+    position: relative;
 }
 
-nav > a {
-    border: 1px solid #ccc;
-    padding: 8px 15px;
-    color: #333;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.nav-link:hover,
+.nav-link.active {
+    color: #6366f1; /* Warna biru saat di-hover atau aktif */
+    background-color: #f3f4f6; /* Latar belakang abu-abu muda saat di-hover atau aktif */
 }
 
-nav > a:hover{
-    background-color: #f0f0f0;
-    color: #333;
+.mobile-menu-toggle {
+    display: none; /* Tersembunyi secara default, ditampilkan di media queries */
+    flex-direction: column; /* Susun garis vertikal */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    gap: 4px; /* Jarak antar garis */
 }
 
-hr{
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 20px 0;
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #4b5563; /* Warna garis toggle */
+    transition: all 0.3s ease; /* Transisi halus */
 }
 
-section{
-    padding: 20px 0;
-    min-height: 250px;
+/* Konten Utama */
+.main-content {
+    margin-top: 100px; /* Beri ruang untuk header tetap */
 }
 
-.banner-img{
+.section {
+    padding: 4rem 0; /* Padding atas dan bawah untuk setiap bagian */
+    background-color: #fff; /* Latar belakang putih untuk bagian */
+    margin-bottom: 20px; /* Jarak antar bagian */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan lembut */
+    border-radius: 8px; /* Sudut membulat */
+}
+
+/* Hapus margin-bottom dari bagian terakhir jika diperlukan, atau biarkan ditangani oleh padding container */
+.section:last-of-type {
+    margin-bottom: 0;
+}
+
+
+.section-header {
+    text-align: center; /* Pusatkan teks header bagian */
+    margin-bottom: 3rem; /* Jarak bawah header bagian */
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937; /* Warna judul bagian */
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.125rem;
+    color: #6b7280; /* Warna teks deskripsi bagian */
+    max-width: 600px;
+    margin: 0 auto; /* Pusatkan paragraf */
+}
+
+/* Gaya Carousel */
+.carousel-container {
+    margin-bottom: 3rem; /* Jarak bawah container carousel */
+}
+
+.carousel {
+    position: relative;
+    max-width: 900px; /* Lebar maksimum carousel */
+    margin: 0 auto; /* Pusatkan carousel */
+    border-radius: 1rem;
+    overflow: hidden; /* Sembunyikan konten yang melampaui batas */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Bayangan kompleks */
+}
+
+.carousel-track {
+    position: relative;
     height: 400px;
-    background-image: url(https://picsum.photos/4000);
-    background-size: cover;
-    background-position: center;
-    margin-top: 20px;
-    border-radius: 8px;
+    display: flex; /* Mengubah menjadi flex untuk pengelolaan slide yang lebih mudah */
+    transition: transform 0.5s ease-in-out; /* Transisi halus untuk slide */
 }
 
-/* Body Component */
-.container-body{
+.carousel-slide {
+    min-width: 100%; /* Setiap slide mengambil lebar penuh */
+    height: 100%;
+    display: flex; /* Pastikan konten di dalamnya sejajar */
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Untuk overlay konten */
+    flex-shrink: 0; /* Mencegah penyusutan */
+}
+
+/* Kita tidak lagi memerlukan .carousel-slide.active untuk opacity langsung, JS menangani transform */
+/* Pertahankan untuk status awal jika diperlukan */
+.carousel-slide.active {
+    /* Tidak ada gaya spesifik yang diperlukan di sini, dikelola oleh transform JS */
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pastikan gambar mengisi seluruh area */
+}
+
+.slide-content {
+    position: absolute; /* Posisikan konten di atas gambar */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 1)); /* Gradien transparan ke gelap */
+    color: white; /* Warna teks putih */
+    padding: 2rem;
+    text-align: center;
+}
+
+.slide-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.slide-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.project-tags {
+    display: flex; /* Gunakan flexbox untuk tag proyek */
+    justify-content: center; /* Pusatkan tag */
+    gap: 0.5rem; /* Jarak antar tag */
+    flex-wrap: wrap; /* Izinkan tag untuk membungkus ke baris berikutnya */
+}
+
+.tag {
+    background-color: rgba(255, 255, 255, 0.2); /* Latar belakang tag semi-transparan */
+    color: white; /* Warna teks tag */
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem; /* Sudut membulat */
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.carousel-indicators {
+    position: absolute; /* Posisikan indikator di atas carousel */
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%); /* Pusatkan secara horizontal */
+    display: flex; /* Gunakan flexbox untuk indikator */
+    gap: 0.5rem; /* Jarak antar indikator */
+    z-index: 10; /* Pastikan indikator dapat diklik */
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%; /* Membuat lingkaran */
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5); /* Warna indikator semi-transparan */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: all 0.3s ease; /* Transisi halus */
+}
+
+.indicator.active {
+    background-color: white; /* Warna putih saat aktif */
+    transform: scale(1.2); /* Sedikit membesar saat aktif */
+}
+
+/* Detail Profil */
+.profile-details {
+    display: grid; /* Gunakan grid untuk tata letak detail profil */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kolom responsif */
+    gap: 2rem; /* Jarak antar item grid */
+    margin-top: 3rem;
+}
+
+.detail-card {
+    text-align: center; /* Pusatkan teks */
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: #f9fafb; /* Latar belakang kartu detail */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi halus */
+}
+
+.detail-card:hover {
+    transform: translateY(-5px); /* Geser sedikit ke atas saat di-hover */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan saat di-hover */
+}
+
+.detail-card i {
+    font-size: 2.5rem;
+    color: #6366f1; /* Warna ikon */
+    margin-bottom: 1rem;
+}
+
+.detail-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937; /* Warna judul kartu */
+    margin-bottom: 0.5rem;
+}
+
+.detail-card p {
+    color: #6b7280; /* Warna teks deskripsi kartu */
+}
+
+/* Bagian Portofolio (tidak ada gaya spesifik selain .section) */
+.portfolio-section {
+    background-color: #f9fafb; /* Latar belakang sedikit berbeda untuk pemisahan visual */
+}
+
+/* Bagian Kontak */
+.contact-content {
+    display: flex; /* Menggunakan flexbox untuk menempatkan form dan output box berdampingan */
+    flex-wrap: wrap; /* Memungkinkan item untuk pindah ke baris berikutnya pada layar kecil */
+    gap: 2rem; /* Jarak antara form dan output box, disesuaikan dengan gap di .contact-content sebelumnya */
+    max-width: 1000px;
+    margin: 0 auto; /* Pusatkan konten kontak */
+    justify-content: center; /* Pusatkan elemen jika ada ruang kosong */
+}
+
+.contact-info { /* Ini untuk info kontak di samping form, jika ingin dipakai. */
     display: flex;
     flex-direction: column;
-    margin: 20px;
-    margin-left: 80px; 
-    margin-right: 80px; 
+    gap: 2rem;
 }
 
-.profile-container{
-    padding: 20px 0;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.profile-item{
-    text-align: center;
-    flex: 1 1 150px;
-    max-width: 180px;
-}
-
-.profile-item img{
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #333;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Message Us */
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;      
-    gap: 30px;
-    margin-top: 40px;
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.form-group{
+.contact-item {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-    align-items: flex-start; 
+    gap: 1rem;
 }
 
-.form-group label{
-    display: inline-block;
-    width: 120px;
-    text-align: left;
-    margin-right: 10px;
-    color: #333;
-    flex-shrink: 0;
+.contact-item i {
+    font-size: 1.5rem;
+    color: #6366f1;
+    width: 40px;
+    text-align: center;
 }
 
-.form-group .colon{
-    display: inline-block;
-    margin-right: 10px;
-    flex-shrink: 0;
+.contact-item h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
 }
 
-.form-group input[type="text"],
-.form-group input[type="date"],
-.form-group textarea {
-    flex: 1; 
-    min-width: 150px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+.contact-item p {
+    color: #6b7280;
 }
 
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
-.form-group input[type="radio"] {
-    margin-right: 5px;
-}
-
-.form-group label input[type="radio"] {
-    display: inline;
-    width: auto;
-}
-
-.form-group input[type="submit"] {
-    background-color: #007bff;
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #6366f1;
     color: white;
-    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: #4f46e5;
+    transform: translateY(-2px);
+}
+
+/* Formulir Kontak */
+.contact-form {
+    flex: 1; /* Memungkinkan kedua elemen untuk tumbuh dan menyusut */
+    min-width: 300px; /* Lebar minimum sebelum wrap */
+    background-color: #f9fafb; /* Latar belakang formulir */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan lembut */
+}
+
+/* Gaya khusus untuk Output Box */
+.output-box {
+    flex: 1; /* Memungkinkan kedua elemen untuk tumbuh dan menyusut */
+    min-width: 300px; /* Lebar minimum sebelum wrap */
+    padding: 2rem; /* Padding disesuaikan dengan .contact-form yang sudah ada */
+    border-radius: 1rem; /* Border-radius disesuaikan dengan .contact-form yang sudah ada */
+    background-color: #f9fafb; /* Latar belakang disesuaikan dengan .contact-form yang sudah ada */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan lembut */
+}
+
+.output-box h3 {
+    font-size: 1.25rem; /* Ukuran font disesuaikan */
+    font-weight: 600;
+    color: #1f2937; /* Warna judul disesuaikan */
+    margin-bottom: 1.5rem; /* Memberi ruang di bawah judul */
+    text-align: center; /* Pusatkan judul */
+}
+
+.output-box p {
+    font-size: 1rem; /* Ukuran font disesuaikan */
+    color: #6b7280; /* Warna teks disesuaikan */
+    margin-bottom: 0.75rem; /* Jarak antar paragraf */
+    word-wrap: break-word; /* Memastikan teks panjang tidak meluber */
+}
+
+.output-box p strong {
+    color: #374151; /* Warna untuk label strong */
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+
+.form-group {
+    margin-bottom: 1.5rem; /* Jarak bawah antar grup formulir */
+}
+
+.form-group label {
+    display: block; /* Buat label menjadi blok */
+    font-weight: 500;
+    color: #374151; /* Warna teks label */
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%; /* Lebar penuh */
+    padding: 0.75rem;
+    border: 1px solid #d1d5db; /* Border abu-abu */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transisi halus */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none; /* Hapus outline default saat fokus */
+    border-color: #6366f1; /* Border biru saat fokus */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); /* Bayangan saat fokus */
+}
+
+.submit-btn {
+    width: 100%; /* Lebar penuh */
+    background-color: #6366f1; /* Latar belakang biru */
+    color: white; /* Warna teks putih */
+    padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    margin-left: auto;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transisi halus */
 }
 
-.form-group input[type="submit"]:hover {
-    background-color: #0056b3;
+.submit-btn:hover {
+    background-color: #4f46e5; /* Warna lebih gelap saat di-hover */
+    transform: translateY(-1px); /* Geser sedikit ke atas saat di-hover */
 }
 
-form {
-    flex: 1;
-    max-width: 500px;
-    padding: 20px;
-    margin: 0 auto; 
+/* Footer */
+.footer {
+    background-color: #1f2937; /* Latar belakang gelap */
+    color: white; /* Warna teks putih */
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 20px; /* Tambahkan sedikit ruang di atas footer */
 }
 
-.output-box{
-    flex: 1;
-    min-width: 300px;
-    max-width: 500px;
-    margin: 0 auto; 
-    
-    border: 1px solid #ccc;
-    padding: 15px;
-    min-height: 230px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    text-align: left;
-    word-wrap: break-word;
-    box-sizing: border-box;
-}
-
-.output-box b{
-    display: inline-block;
-    color: #333;
-    width: 110px;
-}
-
-/* --- Media Queries for Responsiveness --- */
-
-/* For larger tablets and smaller desktops */
-@media (max-width: 1024px) {
-    .container-body {
-        margin-left: 40px;
-        margin-right: 40px;
+/* Desain Responsif */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column; /* Tata letak kolom pada layar kecil */
+        gap: 1rem;
+        padding: 1rem 0;
     }
-}
 
-/* For tablets (portrait) and larger phones */
-@media (max-width: 992px) {
-    .main-header {
+    .profile-info {
         flex-direction: column;
-        align-items: center;
-        padding: 15px;
-    }
-
-    .main-logo {
-        margin-left: 0; 
-        margin-bottom: 15px; 
-    }
-
-    nav {
-        width: 100%; 
-        justify-content: center; 
-        margin-top: 0; 
-    }
-
-    nav > a {
-        flex-grow: 1; 
         text-align: center;
-        padding: 10px 5px; 
-        margin: 0 5px; 
+        gap: 0.5rem;
     }
 
-    .container-body {
-        margin: 20px; 
+    .profile-name h1 {
+        font-size: 1.25rem;
     }
 
-    .container {
-        flex-direction: column; 
-        align-items: center; 
-        gap: 20px; 
+    .profile-name p {
+        font-size: 0.875rem;
     }
 
-    form, .output-box {
-        max-width: 80%;
-        width: 100%;
-        margin: 0 auto; 
+    .nav-links {
+        display: none; /* Sembunyikan secara default di mobile */
+        flex-direction: column;
+        position: absolute; /* Posisikan absolut untuk menu dropdown */
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e5e7eb;
+        padding: 1rem;
+        gap: 0.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Tambahkan bayangan ke menu dropdown */
+    }
+
+    .nav-links.active {
+        display: flex; /* Tampilkan saat aktif */
+    }
+
+    .mobile-menu-toggle {
+        display: flex; /* Tampilkan di mobile */
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .carousel-track {
+        height: 300px; /* Sesuaikan tinggi carousel */
+    }
+
+    .slide-content {
+        padding: 1rem;
+    }
+
+    .slide-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .profile-details {
+        grid-template-columns: 1fr; /* Satu kolom pada layar kecil */
+        gap: 1.5rem;
+    }
+
+    /* Penyesuaian responsif untuk contact-content */
+    .contact-content {
+        flex-direction: column; /* Ubah kembali ke kolom pada layar kecil */
+        gap: 2rem; /* Jarak antar kolom */
+    }
+
+    .contact-form,
+    .output-box {
+        flex-basis: auto; /* Biarkan flex menentukan basis, atau 100% */
+        width: 100%; /* Pastikan mengambil lebar penuh */
+    }
+
+    .project-tags {
+        justify-content: center; /* Pusatkan tag proyek */
+    }
+
+    .section {
+        padding: 3rem 15px; /* Sesuaikan padding untuk mobile */
     }
 }
 
-/* For smaller phones */
-@media (max-width: 576px) {
-    .main-header {
-        padding: 10px;
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
     }
 
-    nav {
-        flex-direction: column; 
-        gap: 10px; 
+    .section {
+        padding: 2rem 10px; /* Sesuaikan padding lebih lanjut untuk mobile yang lebih kecil */
     }
 
-    nav > a {
-        width: 90%; 
-        margin: 0 auto; 
+    .carousel-track {
+        height: 250px;
     }
 
-    h1 {
-        font-size: 1.8em; 
+    .detail-card {
+        padding: 1.5rem;
     }
 
-    .container-body {
-        margin: 10px; 
+    .contact-form,
+    .output-box {
+        padding: 1.5rem; /* Sesuaikan padding untuk mobile yang lebih kecil */
     }
 
-    .banner-img {
-        height: 250px; 
+    .output-box h3 {
+        font-size: 1.1rem;
     }
 
-    .profile-item {
-        flex: 1 1 120px; 
-        max-width: 150px; 
+    .output-box p {
+        font-size: 0.9rem;
     }
 
-    .profile-item img {
-        width: 120px;
-        height: 120px;
+    .profile-photo {
+        width: 50px;
+        height: 50px;
     }
 
-    form, .output-box {
-        padding: 15px;
-        max-width: 95%; 
-        margin: 0 auto;
+    .profile-name h1 {
+        font-size: 1.1rem;
     }
 
-    .form-group {
-        flex-direction: column; 
-        align-items: flex-start; 
-    }
-
-    .form-group label {
-        width: auto; 
-        margin-right: 0;
-        margin-bottom: 5px; 
-    }
-
-    .form-group .colon {
-        display: none; 
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="date"],
-    .form-group textarea {
-        width: 100%; 
-        min-width: unset; 
-    }
-
-    .form-group label input[type="radio"] {
-        display: inline-block; 
-        margin-right: 5px;
-        width: auto;
-    }
-
-    .form-group input[type="submit"] {
-        width: 100%; 
-        margin-left: 0; 
-    }
-
-    .output-box b {
-        width: auto; 
-        display: block; 
-        margin-bottom: 5px;
+    .profile-name p {
+        font-size: 0.8rem;
     }
 }
